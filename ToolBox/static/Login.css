@@ -1,0 +1,182 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color:#282C35;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+body {
+    background-color: #282C35;
+    color: white;
+}
+
+
+
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+ 
+    background-color: transparent;
+    color: white;
+    border-radius: 20px;
+    border: 1px solid white;
+    padding: 5px 10px;
+   margin-top:19px;
+}
+
+.form-control::placeholder {
+    color: white;
+}
+
+.form-control:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+
+.input-group-append {
+    margin-left: -40px;
+}
+
+.btn {
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+.transparent-box {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+}
+
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  margin-bottom: 20px;
+}
+
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+
+.form-control::placeholder {
+  color: white;
+}
+
+
+.form-control:focus,
+.form-control:not(:placeholder-shown) {
+  color: white;
+}
+
+
+.btn-primary {
+  background-color: black;
+  border-color: black;
+}
+
+
+.btn-primary:hover {
+  background-color: #282C35;
+  border-color: #282C35;
+}
+
+
+.btn-below-message {
+  background-color: black;
+  border-color: black;
+    margin-top: auto;
+}
+
+.btn-below-message:hover {
+  background-color: #282C35;
+  border-color: #282C35;
+
+}
+
+
+.btn-block {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  color: #282C35;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.logo {
+  margin: 0;
+  padding: 0;
+}
+
+.blue {
+  color: blue;
+}
+.gradient-text {
+  background:linear-gradient(147deg, #000000 0%, #04619f 74%);
+
+  
+
+
+
+}
+
+
+.navbar-brand {
+  font-weight: bold;
+  color: white;
+}
+
+
+.navbar {
+  background-color:Black; 
+  height: 80px;
+}
+
+.navbar .nav-link i {
+  font-size: 20px; 
+  font-weight: bold; 
+}
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.dropdown-menu {
+  margin-top: 0; 
+}

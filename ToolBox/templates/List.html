@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolBox | List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/List.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('home') }}">ToolBox</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                            {% for category in categories %}
+                                <li><a class="dropdown-item" href="{{ url_for('list_by_category', category_id=category[0]) }}">{{ category[1] }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="brandDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Brands
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="brandDropdown">
+                            {% for brand in brands %}
+                                <li><a class="dropdown-item" href="{{ url_for('list_by_brand', brand_id=brand[0]) }}">{{ brand[1] }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('rent') }}">Rent</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('services') }}">Services</a>
+                    </li>
+                </ul>
+                <form class="d-flex" action="{{ url_for('search') }}" method="GET">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        {% if user_name %}
+                            <a class="nav-link text-success" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ user_name }}">
+                                <i class="bi bi-person text-success"></i>
+                            </a>
+                        {% else %}
+                            <a class="nav-link" href="{{ url_for('login') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Login/Signup">
+                                <i class="bi bi-person"></i>
+                            </a>
+                        {% endif %}
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('cart') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cart">
+                            <i class="bi bi-tools"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><u>About Us</u></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><u>Contact Us</u></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+     <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <label for="sort">Sort by:</label>
+                <select id="sort" class="form-select" onchange="updateSort()">
+                    <option value="price_asc" {% if sort_by == 'price' and order == 'asc' %}selected{% endif %}>Price: Low to High</option>
+                    <option value="price_desc" {% if sort_by == 'price' and order == 'desc' %}selected{% endif %}>Price: High to Low</option>
+                    <option value="rating_asc" {% if sort_by == 'rating' and order == 'asc' %}selected{% endif %}>Rating: Low to High</option>
+                    <option value="rating_desc" {% if sort_by == 'rating' and order == 'desc' %}selected{% endif %}>Rating: High to Low</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row row-cols-4">
+            {% for tool in tools %}
+                <div class="col">
+                    <div class="card" style="width: 20rem;">
+                        <img src="{{ tool[4] }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ url_for('item_details', item_id=tool[0]) }}">{{ tool[1] }}</a></h5>
+                            <span class="discount">{{ tool[2] }} % off</span>
+                            <h5 class="card-title price">£ {{ tool[3] }}</h5>
+                            <a href="{{ url_for('item_details', item_id=tool[0]) }}" class="btn btn-outline-success">Add to Basket</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        {% for p in range(1, total_pages + 1) %}
+            <li class="page-item {% if page == p %}active{% endif %}">
+                <a class="page-link" href="?page={{ p }}&query={{ request.args.get('query') }}{% if sort_by %}&sort_by={{ sort_by }}{% endif %}{% if order %}&order={{ order }}{% endif %}">{{ p }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+    <!-- Items end -->
+    <footer class="bg-dark text-center text-white">
+        <div class="container p-4 pb-0">
+            <section class="mb-4">
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-facebook"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-twitter-x"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-google"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-instagram"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-linkedin"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-github"></i></a>
+            </section>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2023 Copyright:
+            <a class="text-white" href="#">toolbox.com</a>
+        </div>
+    </footer>
+      <script>
+        function updateSort() {
+            const sort = document.getElementById('sort').value;
+            const [sort_by, order] = sort.split('_');
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('sort_by', sort_by);
+            urlParams.set('order', order);
+            window.location.search = urlParams.toString();
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

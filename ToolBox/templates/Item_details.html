@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolBox | Item Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/Item_Details.css">
+</head>
+<body>
+
+     <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('home') }}">ToolBox</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                            {% for category in categories %}
+                                <li><a class="dropdown-item" href="{{ url_for('list_by_category', category_id=category[0]) }}">{{ category[1] }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="brandDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Brands
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="brandDropdown">
+                            {% for brand in brands %}
+                                <li><a class="dropdown-item" href="{{ url_for('list_by_brand', brand_id=brand[0]) }}">{{ brand[1] }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('rent') }}">Rent</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('services') }}">Services</a>
+                    </li>
+                </ul>
+                <form class="d-flex" action="{{ url_for('search') }}" method="GET">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        {% if user_name %}
+                            <a class="nav-link text-success" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ user_name }}">
+                                <i class="bi bi-person text-success"></i>
+                            </a>
+                        {% else %}
+                            <a class="nav-link" href="{{ url_for('login') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Login/Signup">
+                                <i class="bi bi-person"></i>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('cart') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cart">
+                            <i class="bi bi-tools"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><u>About Us</u></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><u>Contact Us</u></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">List</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Details</li>
+  </ol>
+</nav>
+     {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="container mt-2">
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="flash-message">
+                    <ul class="list-unstyled mb-0">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Overview Section -->
+            <div class="col-md-6">
+                <img src="{{ tool[4] }}" class="img-fluid card-img-top" alt="Tool Image">
+            </div>
+            <div class="col-md-6">
+                <h1>{{ tool[1] }}</h1>
+                <p class="text-muted">Rating: {{ tool[5] }}/5</p>
+                <p class="discount">{{ tool[2] }}% off</p>
+                <h2 class="card-title price">£ {{ tool[3] }}</h2>
+               <form method="POST" action="{{ url_for('add_to_basket', item_id=tool[0]) }}">
+    <button type="submit" class="btn btn-outline-success">Add to Basket</button>
+</form>
+
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <!-- Specifications Section -->
+        <div class="row">
+            <div class="col-12">
+                <h2>Specifications</h2>
+                <p>{{ tool[6] }}</p>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <!-- Customer Reviews Section -->
+       <!-- Customer Reviews Section -->
+<div class="row">
+    <div class="col-12">
+        <h2>Customer Reviews</h2>
+        <!-- Existing reviews -->
+        {% for review in reviews %}
+        <div class="review">
+            <h4>{{ review[0] }}</h4>
+           <p class="text-muted">Rating: {{ review[1] }}/5</p>
+            <p>{{ review[2] }}</p>
+        </div>
+        {% endfor %}
+
+        <!-- Form to add a new review -->
+        <hr>
+        <form method="POST" action="{{ url_for('item_details', item_id=tool[0]) }}" id="reviewForm">
+            <div class="mb-3">
+                <label for="review_name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="review_name" name="review_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="rating" class="form-label">Rating</label>
+                <input type="hidden" id="rating" name="rating" required>
+                <!-- Star rating display -->
+                <div class="stars" data-rating="0">
+                    <span class="star" data-value="1">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="5">&#9733;</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="review_text" class="form-label">Review</label>
+                <textarea class="form-control" id="review_text" name="review_text" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-success">Submit Review</button>
+        </form>
+    </div>
+</div>
+
+    </div>
+
+    <footer class="bg-dark text-center text-white mt-5">
+        <div class="container p-4 pb-0">
+            <section class="mb-4">
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-facebook"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-twitter-x"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-google"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-instagram"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-linkedin"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-github"></i></a>
+            </section>
+        </div>
+
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2023 Copyright:
+            <a class="text-white" href="#">toolbox.com</a>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.stars');
+        stars.forEach(star => {
+            const rating = parseInt(star.dataset.rating);
+            const starIcons = star.querySelectorAll('.star');
+
+            starIcons.forEach((starIcon, index) => {
+                starIcon.addEventListener('click', function() {
+                    const value = parseInt(starIcon.dataset.value);
+                    star.dataset.rating = value;
+                    updateStarRating(star, value);
+                });
+            });
+
+            // Initialize star rating display
+            updateStarRating(star, rating);
+        });
+
+        function updateStarRating(star, rating) {
+            const starIcons = star.querySelectorAll('.star');
+            starIcons.forEach(starIcon => {
+                const value = parseInt(starIcon.dataset.value);
+                starIcon.classList.toggle('rated', value <= rating);
+            });
+
+            // Update hidden input value
+            document.getElementById('rating').value = rating;
+        }
+    });
+</script>
+ <script>
+        // Auto-dismiss flash messages immediately
+        window.onload = function() {
+            const flashMessage = document.getElementById('flash-message');
+            if (flashMessage) {
+                setTimeout(() => {
+                    flashMessage.style.display = 'none';
+                }, 2000);
+            }
+        };
+    </script>
+</body>
+</html>

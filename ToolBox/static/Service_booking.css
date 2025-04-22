@@ -1,0 +1,114 @@
+body {
+    background-color: #282C35;
+    color: white;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: white !important;
+}
+
+.nav-item {
+    margin-left: 40px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    padding: 8px 10px;
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #28a745;
+}
+
+.navbar-nav .nav-item .nav-link i {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover i {
+    color: #28a745;
+}
+
+.navbar-nav .nav-item .dropdown-menu {
+    margin: 0;
+}
+
+.navbar .form-control {
+    width: 300px;
+
+}
+
+.navbar .form-control + .btn {
+    margin-left: 5px;
+}
+
+.navbar {
+    background-color: black;
+    height: 80px;
+}
+
+.navbar .nav-link i {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    margin-top: 0;
+}
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: white;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar .dropdown-menu {
+    background-color: #282C35;
+    border: 1px solid #444;
+}
+.nav-link.logged-in {
+            color: green !important;
+            }
+
+        .book-body {
+            max-width: 500px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            background-color:transparent;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group{
+            padding-left: 30px;
+            margin: 20px;
+        }
+        .form-control{
+            width: 350px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .book-btn{
+
+            width: 250px;
+            margin-left: 85px;
+            
+        }
+
+   .breadcrumb{
+ background-color:transparent;

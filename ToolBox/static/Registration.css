@@ -1,0 +1,120 @@
+body {
+  margin: 0; /* Remove default body margin */
+  padding: 0; /* Remove default body padding */
+  background-color: #282C35; /* Fallback color in case the background image doesn't load */
+ /* Replace 'background-image.jpg' with the path to your desired image */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white; /* Text color for better contrast with the background image */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 105vh;
+  
+}
+.transparent-box {
+  background-color: rgba(0, 0, 0, 0.8); /* Darker transparent box */
+  padding: 30px;
+  border-radius: 10px;
+  width: 500px; 
+}
+
+
+.input-group-append {
+    margin-left: -40px;
+}
+
+.btn {
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Adjust the textbox styles */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1); /* Lighter black for the text box */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border-radius */
+  padding: 10px; /* Add padding */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Add shadow */
+}
+
+/* Change text box color when clicked */
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.2); /* Lighter black when clicked */
+  border-color: rgba(255, 255, 255, 0.2); /* Matching border color */
+}
+
+/* Placeholder color */
+.form-control::placeholder {
+  color: white; /* White placeholder color */
+}
+
+/* Change the color of text entered by the user */
+.form-control:focus,
+.form-control:not(:placeholder-shown) {
+  color: white; /* White text color */
+}
+
+
+
+/* Change the button color to black */
+.btn-primary {
+  background-color: black;
+  border-color: black;
+}
+
+/* Change button hover color */
+.btn-primary:hover {
+  background-color: #282C35;
+  border-color: #282C35; /* Matching border color */
+}
+
+
+.form-check-input:checked {
+  background-color: black;
+}
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  color: #282C35;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: white;
+}
+
+
+.navbar {
+  background-color:Black; 
+  height: 80px;
+}
+
+.navbar .nav-link i {
+  font-size: 20px; 
+  font-weight: bold; 
+}
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.dropdown-menu {
+  margin-top: 0; 
+}
+
+
+

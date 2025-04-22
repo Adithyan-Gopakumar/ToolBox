@@ -1,0 +1,270 @@
+body {
+    background-color: #282C35;
+    color: white;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: white !important;
+}
+
+.nav-item {
+    margin-left: 40px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    padding: 8px 10px;
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #28a745;
+}
+
+.navbar-nav .nav-item .nav-link i {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover i {
+    color: #28a745;
+}
+
+.navbar-nav .nav-item .dropdown-menu {
+    margin: 0;
+}
+
+.navbar .form-control {
+    width: 300px;
+
+}
+
+.navbar .form-control + .btn {
+    margin-left: 5px;
+}
+
+.navbar {
+    background-color: black;
+    height: 80px;
+}
+
+.navbar .nav-link i {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    margin-top: 0;
+}
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: white;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar .dropdown-menu {
+    background-color: #282C35;
+    border: 1px solid #444;
+}
+
+.nav-link.logged-in {
+            color: green !important;
+            }
+.card-img-top {
+    height: 250px;
+}
+
+.card-img {
+    height: 450px;
+    width: 700px;
+}
+
+.card {
+
+    margin: 20px;
+    background-color: #282C35;
+    height: 550px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.card-title {
+    color: white;
+    margin-bottom: auto;
+}
+.discount {
+    display: inline-block;
+    margin-bottom: -5px;
+    padding: 5px 10px;
+    max-width: 140px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.price {
+    margin-top: 5px;
+}
+
+
+
+
+body {
+    background-color: #282C35;
+    color: white;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: white !important;
+}
+
+.nav-item {
+    margin-left: 40px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    padding: 8px 10px;
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #28a745;
+}
+
+.navbar-nav .nav-item .nav-link i {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover i {
+    color: #28a745;
+}
+
+.navbar-nav .nav-item .dropdown-menu {
+    margin: 0;
+}
+
+.navbar .form-control {
+    width: 300px;
+
+}
+
+.navbar .form-control + .btn {
+    margin-left: 5px;
+}
+
+.navbar {
+    background-color: black;
+    height: 80px;
+}
+
+.navbar .nav-link i {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    margin-top: 0;
+}
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: white;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar .dropdown-menu {
+    background-color: #282C35;
+    border: 1px solid #444;
+}
+
+
+.card-img-top {
+    height: 250px;
+}
+
+.card-img {
+    height: 450px;
+    width: 700px;
+}
+
+.card {
+
+    margin: 20px;
+    background-color: #282C35;
+    height: 550px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.card-title {
+    color: white;
+    margin-bottom: auto;
+}
+.discount {
+    display: inline-block;
+    margin-bottom: -5px;
+    padding: 5px 10px;
+    max-width: 140px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.price {
+    margin-top: 5px;
+}
+
+.col
+{
+margin-right:60px;
+}
+
+
+.breadcrumb{
+background-color: transparent;
+}

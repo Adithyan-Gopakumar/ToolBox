@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Carousel Item / Offer</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="/static/admin.css">
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Add Carousel Item</h1>
+        <form method="POST" action="{{ url_for('add_carousel') }}">
+            <div class="form-group">
+                <label for="image_url">Image URL</label>
+                <input type="text" class="form-control" id="image_url" name="image_url" required>
+            </div>
+            <div class="form-group">
+                <label for="category_id">Category</label>
+                <select class="form-control" id="category_id" name="category_id" required>
+                    <option value="">Select Category</option>
+                    {% for category in categories %}
+                    <option value="{{ category[0] }}">{{ category[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brand_id">Brand</label>
+                <select class="form-control" id="brand_id" name="brand_id" required>
+                    <option value="">Select Brand</option>
+                    {% for brand in brands %}
+                    <option value="{{ brand[0] }}">{{ brand[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-outline-success">Add Carousel Item</button>
+        </form>
+
+        <hr class="my-5">
+
+        <h1>Add Offer</h1>
+        <form method="POST" action="{{ url_for('add_offer') }}">
+            <div class="form-group">
+                <label for="offer_image">Offer Image URL</label>
+                <input type="text" class="form-control" id="offer_image" name="offer_image" required>
+            </div>
+            <div class="form-group">
+                <label for="category_id">Category</label>
+                <select class="form-control" id="category_id" name="category_id" required>
+                    <option value="">Select Category</option>
+                    {% for category in categories %}
+                    <option value="{{ category[0] }}">{{ category[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brand_id">Brand</label>
+                <select class="form-control" id="brand_id" name="brand_id" required>
+                    <option value="">Select Brand</option>
+                    {% for brand in brands %}
+                    <option value="{{ brand[0] }}">{{ brand[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-outline-success">Add Offer</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

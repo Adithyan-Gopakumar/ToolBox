@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolBox | Rent Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/rent_booking.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('home') }}">ToolBox</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                            {% for category in categories %}
+                            <li><a class="dropdown-item" href="{{ url_for('list_by_category', category_id=category[0]) }}">{{ category[1] }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="brandDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Brands
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="brandDropdown">
+                            {% for brand in brands %}
+                            <li><a class="dropdown-item" href="{{ url_for('list_by_brand', brand_id=brand[0]) }}">{{ brand[1] }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('rent') }}">Rent</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('services') }}">Services</a>
+                    </li>
+                </ul>
+                <form class="d-flex" action="{{ url_for('search') }}" method="GET">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        {% if user_name %}
+                            <a class="nav-link text-success" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ user_name }}">
+                                <i class="bi bi-person text-success"></i>
+                            </a>
+                        {% else %}
+                            <a class="nav-link" href="{{ url_for('login') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Login/Signup">
+                                <i class="bi bi-person"></i>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cart"><i class="bi bi-tools"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><u>About Us</u></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><u>Contact Us</u></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('rent') }}">Rent</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Details</li>
+        </ol>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ rental_tool[4] }}" class="img-fluid card-img-top" alt="Tool Image">
+            </div>
+            <div class="col-md-6">
+                <h1>{{ rental_tool[1] }}</h1>
+                <p class="text-muted">Rating: {{ rental_tool[5] }}/5</p>
+                <p class="discount">{{ rental_tool[2] }}% off</p>
+                <h2 class="card-title price">£ {{ rental_tool[3] }} per day</h2>
+                 <button class="btn btn-outline-success" data-toggle="modal" data-target="#bookingModal">Rent Now</button>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <div class="row">
+            <div class="col-12">
+                <h2>Specifications</h2>
+                <p>{{ rental_tool[6] }}</p>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <div class="row">
+            <div class="col-12">
+                <h2>Customer Reviews</h2>
+                {% for review in reviews %}
+                <div class="review">
+                    <h4>{{ review[0] }}</h4>
+                    <p class="text-muted">Rating: {{ review[1] }}/5</p>
+                    <p>{{ review[2] }}</p>
+                </div>
+                {% endfor %}
+                <hr>
+                <form method="POST" action="{{ url_for('rent_details', rtool_id=rental_tool[0]) }}" id="reviewForm">
+                    <div class="mb-3">
+                        <label for="review_name" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="review_name" name="review_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Rating</label>
+                        <input type="hidden" id="rating" name="rating" required>
+                        <div class="stars" data-rating="0">
+                            <span class="star" data-value="1">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="5">&#9733;</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="review_text" class="form-label">Review</label>
+                        <textarea class="form-control" id="review_text" name="review_text" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+ <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">Book Tool</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ url_for('book_rental', rtool_id=rental_tool[0]) }}">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ user_details[0] if user_details else '' }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ user_details[1] if user_details else '' }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" class="form-control" id="phone" name="phone_number" value="{{ user_details[2] if user_details else '' }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" value="{{ user_details[3] if user_details else '' }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rental_date">Rental Date</label>
+                            <input type="date" class="form-control" id="rental_date" name="rental_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="return_date">Return Date</label>
+                            <input type="date" class="form-control" id="return_date" name="return_date" required>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success">Rent</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-center text-white mt-5">
+        <div class="container p-4 pb-0">
+            <section class="mb-4">
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-facebook"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-twitter"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-google"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-instagram"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-linkedin"></i></a>
+                <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><i class="bi bi-github"></i></a>
+            </section>
+            <section class="mb-4">
+                <p>ToolBox - A One-Stop Shop for All Your Tool Needs.</p>
+            </section>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2024 ToolBox
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const starIcons = document.querySelectorAll('.stars .star');
+            const ratingInput = document.getElementById('rating');
+
+            starIcons.forEach((icon, index) => {
+                icon.addEventListener('click', () => {
+                    const rating = parseInt(icon.dataset.value);
+                    ratingInput.value = rating;
+                    starIcons.forEach(star => star.classList.remove('selected'));
+                    for (let i = 0; i < rating; i++) {
+                        starIcons[i].classList.add('selected');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

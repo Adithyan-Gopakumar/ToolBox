@@ -1,0 +1,141 @@
+body {
+    background-color: #282C35;
+    color: white;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: white !important;
+}
+
+.nav-item {
+    margin-left: 40px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    padding: 8px 10px;
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #28a745;
+}
+
+.navbar-nav .nav-item .nav-link i {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover i {
+    color: #28a745;
+}
+
+.navbar-nav .nav-item .dropdown-menu {
+    margin: 0;
+}
+
+.navbar .form-control {
+    width: 300px;
+
+}
+
+.navbar .form-control + .btn {
+    margin-left: 5px;
+}
+
+.navbar {
+    background-color: black;
+    height: 80px;
+}
+
+.navbar .nav-link i {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    margin-top: 0;
+}
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: white;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar .dropdown-menu {
+    background-color: #282C35;
+    border: 1px solid #444;
+}
+
+
+
+.nav-link.logged-in {
+            color: green !important;
+            }
+
+
+
+
+
+
+.card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            transition: box-shadow 0.3s ease;
+            background-color:transparent;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color:white;
+        }
+
+        .description {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+
+            text-align: center;
+            padding: 1rem;
+            box-sizing: border-box;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .card:hover .description {
+            display: block;
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+
+       }
+       .breadcrumb{
+ background-color:transparent;

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/profile.css">
+</head>
+<body>
+   <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">ToolBox</a>
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+        </ol>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Your Profile</h2>
+        <div class="mb-3">
+            <label for="name">Name:</label>
+            <p id="name">{{ user[0] }}</p>
+        </div>
+        <div class="mb-3">
+            <label for="email">Email:</label>
+            <p id="email">{{ user[1] }}</p>
+        </div>
+        <div class="mb-3">
+            <label for="phone_number">Phone Number:</label>
+            <p id="phone_number">{{ user[2] }}</p>
+        </div>
+        <div class="mb-3">
+            <label for="address">Address:</label>
+            <p id="address">{{ user[3] }}</p>
+        </div>
+        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#editModal">
+            Edit
+        </button>
+        <form action="{{ url_for('delete_profile') }}" method="POST" style="display:inline;">
+    <button type="submit" class="btn btn-outline-danger" id="deleteProfileBtn">
+        Delete Profile
+    </button>
+</form>
+
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm" method="POST">
+                        <div class="form-group">
+                            <label for="modal-name">Name</label>
+                            <input type="text" class="form-control" id="modal-name" name="name" value="{{ user[0] }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-email">Email</label>
+                            <input type="email" class="form-control" id="modal-email" name="email" value="{{ user[1] }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-phone_number">Phone Number</label>
+                            <input type="tel" class="form-control" id="modal-phone_number" name="phone_number" value="{{ user[2] }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-address">Address</label>
+                            <input type="text" class="form-control" id="modal-address" name="address" value="{{ user[3] }}" required>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('deleteProfileBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete your profile? This action cannot be undone.')) {
+                window.location.href = "{{ url_for('delete_profile') }}";
+            }
+        });
+    </script>
+</body>
+</html>
